@@ -34,4 +34,13 @@ public class BeanConfig {
 	public DietService dietservice() {
 		return new DietService(dietdao());
 	}
+	@Bean
+	public ReportDao reportdao() {
+		return new ReportDao(dataSource());
+	}
+	
+	@Bean
+	public ReportService reportservice() {
+		return new ReportService(reportdao());
+	}
 }

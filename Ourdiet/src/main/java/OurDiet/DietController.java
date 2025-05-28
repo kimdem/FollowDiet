@@ -1,5 +1,6 @@
 package OurDiet;
 import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,10 @@ public class DietController {
 	}
 	@PostMapping("insertdiet")
 	public String insetdiet(@RequestParam("date") String date, Diet diet, HttpSession session, Model model) {
+		int UID = (Integer)session.getAttribute("UID");
 		try {
 			dietservice.insetdiet(diet, session, date);
+			dietservice.info_insert(UID, diet, date);
 			return "redirect:/mainpage";
 		} catch (Exception ex) {
 			System.out.println("에러");
@@ -45,7 +48,29 @@ public class DietController {
 		Integer UID = (Integer)session.getAttribute("UID");
 		if(UID == null) {return "Login";}
 		dietlist _dietlist = dietservice._dietlist(UID, selectedDate);
+		List<Object[]> weights = dietservice.print_W(UID, selectedDate);
 		model.addAttribute("dietlist", _dietlist);
+		model.addAttribute("weights", weights);
 		return "mainpage";
 	}
+	
+	@GetMapping("/Todayweight")
+	public String Todayweight(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day, Model model) {
+		LocalDate Date = LocalDate.of(year, month, day);
+		model.addAttribute("TODAY", Date.toString());
+		return "Todayweight";
+	}
+	@PostMapping("insertW")
+	public String insetW(@RequestParam("weight") float weight, @RequestParam("time") String time, HttpSession session) {
+		int UID = (Integer)session.getAttribute("UID");
+		try {
+			dietservice.weight_insert(UID, weight, time);
+			return "redirect:/mainpage";
+		} catch(Exception ex) {
+			ex.printStackTrace();
+			return "redirect:/mainpage";
+		}
+	}
+	
+	
 }

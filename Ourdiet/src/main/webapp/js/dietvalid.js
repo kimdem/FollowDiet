@@ -14,22 +14,22 @@ function dietvalid() {
 	}
 	if(!floatreg.test(calrory)) {
 		form.calrory.focus();
-		alert("소수점 1자리까지만 입력하시오");
+		alert("소수점 1자리까지의 양수만 입력하시오");
 		return false;
 	}
 	if(!floatreg.test(tan)) {
 			form.tan.focus();
-			alert("소수점 1자리까지만 입력하시오");
+			alert("소수점 1자리까지의 양수만 입력하시오");
 			return false;
 		}
 	if(!floatreg.test(dan)) {
 			form.calrory.focus();
-			alert("소수점 1자리까지만 입력하시오");
+			alert("소수점 1자리까지의 양수만 입력하시오");
 			return false;
 		}
 	if(!floatreg.test(ji)) {
 			form.ji.focus();
-			alert("소수점 1자리까지만 입력하시오");
+			alert("소수점 1자리까지의 양수만 입력하시오");
 			return false;
 		}	
 	

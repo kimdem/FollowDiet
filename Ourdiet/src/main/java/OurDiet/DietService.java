@@ -27,4 +27,32 @@ public class DietService {
 	    }
 		return new dietlist(breakfastList, lunchList, dinnerList);
 	}
+	
+	public void info_insert(int UID, Diet diet, String date) {
+		boolean chk = dietdao.info_check(UID, date);
+		if(chk == true) {
+			dietdao.update_info(UID, diet, date);
+		} else {
+			dietdao.insert_info(UID, diet, date);
+		}
+	}
+	
+	public void weight_insert(int UID, float weight, String time) {
+		boolean chk = dietdao.info_check(UID, time);
+		if(chk == true) {
+			dietdao.update_W(UID, weight, time);
+		} else {
+			dietdao.insert_W(UID, weight, time);
+		}
+	}
+	
+	public List<Object[]> print_W(int UID, LocalDate date) {
+		try {
+			return dietdao.return_W(UID, date);
+		} catch (Exception ex) {
+			System.out.println("체중 출력 DB오류");
+			ex.printStackTrace();
+			return null;
+		}
+	}
 }

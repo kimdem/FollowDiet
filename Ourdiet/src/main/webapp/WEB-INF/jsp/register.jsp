@@ -32,13 +32,13 @@
 			<p>비밀번호 재확인</p>
 			<input type="password" name="ConfirmPwd" placeholder="비밀번호 재확인" required>
 			<p>나이</p>
-			<input type="number" step="1" name="Age" placeholder="나이(숫자만)" required>
+			<input type="number" min="0" step="1" name="Age" placeholder="나이(숫자만)" required>
 			<p>키</p>
-			<input type="number" step="0.1" name="Tall" placeholder="키(숫자만)" required>
+			<input type="number" min="0" step="0.1" name="Tall" placeholder="키(숫자만)" required>
 			<p>몸 무게</p>
-			<input type="number" step="0.1" name="Weight" placeholder="몸 무게(숫자만)" required>
+			<input type="number" min="0" step="0.1" name="Weight" placeholder="몸 무게(숫자만)" required>
 			<p>목표 체중</p>
-			<input type="number" step="0.1" name="WantedWeight" placeholder="목표(숫자만)" required>
+			<input type="number" min="0" step="0.1" name="WantedWeight" placeholder="목표(숫자만)" required>
 			<input type="submit" value="회원가입">
 		</form>
 	</div>

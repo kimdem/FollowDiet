@@ -35,13 +35,13 @@
 		<p>음식 이름
 		<input type="text" name="food" placeholder="음식이름" required>
 		<p>칼로리
-		<input type="number" name="calrory" step="0.1" value="0" placeholder="칼로리" required>
+		<input type="number" name="calrory" min="0" step="0.1" value="0" placeholder="칼로리" required>
 		<p>탄수화물
-		<input type="number" name="tan" step="0.1" value="0" placeholder="탄수화물" required>    
+		<input type="number" name="tan" min="0" step="0.1" value="0" placeholder="탄수화물" required>    
 		<p>단백질
-		<input type="number" name="dan" step="0.1" value="0" placeholder="단백질" required>    
+		<input type="number" name="dan" min="0" step="0.1" value="0" placeholder="단백질" required>    
 		<p>지방
-		<input type="number" name="ji" step="0.1" value="0" placeholder="지방" required>  
+		<input type="number" name="ji" min="0" step="0.1" value="0" placeholder="지방" required>  
 		<input type="submit" value="등록">
 	</form>
 </body>

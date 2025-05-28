@@ -28,10 +28,16 @@
     int selectedday = dayP!= null ? Integer.parseInt(dayP) : nowday;
     boolean yearok = selectedyear == nowyear;
     boolean monthok = selectedmonth == nowmonth && yearok;
+    
+    List<Object[]> weights = (List<Object[]>)request.getAttribute("weights");
+    Object[] arr = weights.get(0);
+    Float WantedWeight = (Float)arr[0];
+    Float Today_weight = (Float)arr[1];
 %>
 <head><title>Ourdiet!</title></head>
 <body>
-	<h1 style="textalign: center">Ourdiet!!</h1><hr>
+	<h1 style="textalign: center">Ourdiet!!</h1><hr><br>
+	<a href="report">통계</a>
 	<div>
 		<form action="#" method="GET">
 			<label>날짜 선택 : </label>
@@ -74,7 +80,12 @@
 	</div>
 	<!-- 여기에 DB로 현재 캘린더 보이기 -->
 	<div>
-		<h1>오늘 몸무게 : </h1>
+		<h1><a href="/Todayweight?year=<%=selectedyear%>&month=<%=selectedmonth%>&day=<%=selectedday%>">오늘 몸무게</a> : 
+			<%
+				if(Today_weight == 0.0) {%> 미입력 / <%=WantedWeight%>KG<%
+				}else {%> <%=Today_weight%> KG / <%=WantedWeight%> KG
+			<%}%>
+		</h1>
 		<h1>오늘의 식단</h1>
 		<h2><a href="/setdiet?level=1&year=<%=selectedyear%>&month=<%=selectedmonth%>&day=<%=selectedday%>">아침 식사</a></h2>
 		<%
