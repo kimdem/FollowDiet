@@ -29,15 +29,19 @@
     boolean yearok = selectedyear == nowyear;
     boolean monthok = selectedmonth == nowmonth && yearok;
     
-    List<Object[]> weights = (List<Object[]>)request.getAttribute("weights");
-    Object[] arr = weights.get(0);
+    double[] recommend = (double[])request.getAttribute("recommend");
+    boolean weight_exists = true;
+    if(recommend[0] == 0) {weight_exists = false;}
+    Object[] arr = (Object[])request.getAttribute("weights");
     Float WantedWeight = (Float)arr[0];
     Float Today_weight = (Float)arr[1];
+    String msg = (String)arr[2];
 %>
 <head><title>Ourdiet!</title></head>
 <body>
 	<h1 style="textalign: center">Ourdiet!!</h1><hr><br>
-	<a href="report">통계</a>
+	<a href="Login">로그아웃</a><br>
+	<a href="report?date=<%=today%>">통계</a>
 	<div>
 		<form action="#" method="GET">
 			<label>날짜 선택 : </label>
@@ -78,14 +82,14 @@
 			</select>
 		</form> 
 	</div>
-	<!-- 여기에 DB로 현재 캘린더 보이기 -->
 	<div>
 		<h1><a href="/Todayweight?year=<%=selectedyear%>&month=<%=selectedmonth%>&day=<%=selectedday%>">오늘 몸무게</a> : 
 			<%
 				if(Today_weight == 0.0) {%> 미입력 / <%=WantedWeight%>KG<%
-				}else {%> <%=Today_weight%> KG / <%=WantedWeight%> KG
-			<%}%>
+				}else {%><%=Today_weight%> KG / <%=WantedWeight%> KG
 		</h1>
+		<p><%=msg %>
+		<%}%>
 		<h1>오늘의 식단</h1>
 		<h2><a href="/setdiet?level=1&year=<%=selectedyear%>&month=<%=selectedmonth%>&day=<%=selectedday%>">아침 식사</a></h2>
 		<%
@@ -102,6 +106,7 @@
 						ji += diet.getJi();
 		%>
 			<p>음식 : <%=diet.getFood() %> || 칼로리 : <%=diet.getCalrory()%> Kcal</p>
+			
 		<%				
 					}
 				} else {
@@ -156,10 +161,10 @@
 			}
 		%>
 		<p>저녁 식사 칼로리 : <%=Calrorysum3 %></p><hr>
-		<p>총합 칼로리 : <%= Calrorysum1 + Calrorysum2 + Calrorysum3%> Kcal</p>
-		<p>총합 탄수화물 : <%=tan %>g(그램)</p>
-		<p>총합 단백질 : <%=dan %>g(그램)<p>
-		<P>총합 지방 : <%=ji %>g(그램)<p>
+		<p>총합 칼로리 : <%= Calrorysum1 + Calrorysum2 + Calrorysum3%> Kcal || 권장 섭취량 : <%if(weight_exists == true) {%><%=String.format("%.1f", recommend[0])%> Kcal<%}else{%>몸무게 미입력<%}%></p>
+		<p>총합 탄수화물 : <%=tan %>g(그램) || 권장 섭취량 : <%if(weight_exists==true){%><%=String.format("%.1f", recommend[1])%> g(그램)<%}else{%>몸무게 미입력<%}%></p>
+		<p>총합 단백질 : <%=dan %>g(그램) || 권장 섭취량 : <%if(weight_exists==true){%><%=String.format("%.1f", recommend[2])%> g(그램)<%}else{%>몸무게 미입력<%}%></p>
+		<p>총합 지방 : <%=ji %>g(그램) || 권장 섭취량 : <%if(weight_exists==true){%><%=String.format("%.1f", recommend[3])%> g(그램)<%}else{%>몸무게 미입력<%}%></p>
 	</div>
 </body>
 </html>

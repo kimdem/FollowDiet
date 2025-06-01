@@ -145,7 +145,7 @@ public class DietDao {
 		}
 	}
 	
-	public List<Object[]> return_W(int UID, LocalDate date) {
+	public Object[] return_W(int UID, LocalDate date) {
 		List<Object[]> weights = jdbcTemplate.query(
 				"SELECT u.WantedWeight, d.Today_weight"
 				+ " FROM user u"
@@ -155,7 +155,18 @@ public class DietDao {
 							rs.getFloat("WantedWeight"),
 							rs.getFloat("Today_weight")
 				},java.sql.Date.valueOf(date), UID);
-			return weights;
+			return weights.get(0);
 	}
 	
+	public Object[] Recommend(int UID) {
+		String sql = "SELECT Age, Tall, gender, ex FROM user WHERE User_id=?";
+		List<Object[]> obj = jdbcTemplate.query(sql,
+			(ResultSet rs, int rowNum) -> new Object[] {
+					rs.getInt("Age"),
+					rs.getFloat("Tall"),
+					rs.getInt("gender"),
+					rs.getFloat("ex")
+			},UID);
+		return obj.get(0);
+	}
 }

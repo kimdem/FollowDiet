@@ -22,4 +22,9 @@ public class MemberRegisterService {
 	public int outUID_S(String User_id) {
 		return memberDao.outUID(User_id);
 	}
+	
+	public int return_goal(int UID) {
+		return memberDao.outGoal(UID);
+	}
+	
 }

@@ -46,9 +46,12 @@ public class DietController {
 	    LocalDate selectedDate = LocalDate.of(selectedyear, selectedmonth, selectedday);
 	    
 		Integer UID = (Integer)session.getAttribute("UID");
+		Integer goal = (Integer)session.getAttribute("goal");
 		if(UID == null) {return "Login";}
 		dietlist _dietlist = dietservice._dietlist(UID, selectedDate);
-		List<Object[]> weights = dietservice.print_W(UID, selectedDate);
+		Object[] weights = dietservice.print_W(UID, selectedDate, goal);
+		double[] recommend = dietservice.Recommend(UID, goal, selectedDate);
+		model.addAttribute("recommend", recommend);
 		model.addAttribute("dietlist", _dietlist);
 		model.addAttribute("weights", weights);
 		return "mainpage";

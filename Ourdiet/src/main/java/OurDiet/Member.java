@@ -6,16 +6,32 @@ public class Member {
 	private float Tall;
 	private float Weight;
 	private float WantedWeight;
-	public Member(String ID, String PWD ,int Age, float Tall, float Weight, float WantedWeight) {
+	private int gender;
+	private float ex;
+	public Member(String ID, String PWD ,int Age, float Tall, float Weight, float WantedWeight, int gender, float ex) {
 		this.ID = ID;
 		this.PWD = PWD;
 		this.Age = Age;
 		this.Tall = Tall;
 		this.Weight = Weight;
 		this.WantedWeight = WantedWeight;
+		this.gender = gender;
+		this.ex = ex;
 	}
 	public String getID() {
 		return ID;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public float getEx() {
+		return ex;
+	}
+	public void setEx(float ex) {
+		this.ex = ex;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 	public void setID(String iD) {
 		ID = iD;

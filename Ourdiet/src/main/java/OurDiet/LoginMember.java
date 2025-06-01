@@ -25,5 +25,4 @@ public class LoginMember {
 		Login_PWD = login_PWD;
 	}
 	
-	
 }

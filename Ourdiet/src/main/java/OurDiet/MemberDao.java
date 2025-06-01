@@ -23,7 +23,9 @@ public class MemberDao {
 						rs.getInt("Age"), 
 						rs.getFloat("Tall"),
 						rs.getFloat("Weight"),
-						rs.getFloat("WantedWeight")
+						rs.getFloat("WantedWeight"),
+						rs.getInt("gender"),
+						rs.getFloat("ex")
 						);
 				return member;
 			},ID);
@@ -34,7 +36,11 @@ public class MemberDao {
 		jdbcTemplate.update(
 				new PreparedStatementCreator() {
 					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
-					String sql = "insert into user (ID, PWD, Age, Tall, Weight, WantedWeight) values (?, ?, ?, ?, ?, ?)";
+					String sql = "insert into user (ID, PWD, Age, Tall, Weight, WantedWeight, goal, gender, ex) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					int goal = 1;
+					if(member.getWeight() > member.getWantedWeight()) {
+						goal = 0;
+					}
 					PreparedStatement pstmt = con.prepareStatement(sql);
 					pstmt.setString(1, member.getID());
 					pstmt.setString(2, member.getPWD());
@@ -42,6 +48,9 @@ public class MemberDao {
 					pstmt.setFloat(4, member.getTall());
 					pstmt.setFloat(5, member.getWeight());
 					pstmt.setFloat(6, member.getWantedWeight());
+					pstmt.setInt(7, goal);
+					pstmt.setInt(8, member.getGender());
+					pstmt.setFloat(9, member.getEx());
 					return pstmt;
 				}
 			});
@@ -67,5 +76,10 @@ public class MemberDao {
 	public int outUID(String User_id) {
 		String sql = "SELECT User_id FROM user WHERE ID = ?";
 	    return jdbcTemplate.queryForObject(sql, Integer.class, User_id);
+	}
+	
+	public int outGoal(int UID) {
+		String sql = "SELECT goal FROM user WHERE User_id=?";
+		return jdbcTemplate.queryForObject(sql, Integer.class, UID);
 	}
 }

@@ -32,6 +32,8 @@ public class WebController {
 		boolean ok = memberRegisterService.login(members);
 		if(ok == true) {
 			session.setAttribute("UID", memberRegisterService.outUID_S(members.getLogin_ID()));
+			int UID = (Integer)session.getAttribute("UID");
+			session.setAttribute("goal", memberRegisterService.return_goal(UID));
 			return "redirect:/mainpage";
 		} else {
 			model.addAttribute("failedLogin", "아이디 또는 비밀번호가 틀렸습니다.");
