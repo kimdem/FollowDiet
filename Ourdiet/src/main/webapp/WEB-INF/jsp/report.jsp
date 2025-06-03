@@ -6,7 +6,6 @@
 <head><title>통계보기</title></head>
 <body>
 	<h1>통계</h1><hr>
-	<a href="mainpage">뒤로</a> 
 	<form action="#" method="GET">
 		<label for="date">주차선택 </label><br>
 		<select name="date" id="date" onchange="this.form.submit()">

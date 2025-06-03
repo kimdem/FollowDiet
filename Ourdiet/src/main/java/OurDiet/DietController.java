@@ -16,13 +16,7 @@ public class DietController {
 	public DietService dietservice;
 	@Autowired
 	public MemberDao memberdao;
-	@GetMapping("setdiet")
-	public String setdiet(@RequestParam("level") String level, @RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day, Model model) {
-		LocalDate selectedDate = LocalDate.of(year, month, day);
-		model.addAttribute("selectedDate", selectedDate.toString());
-		model.addAttribute("level", level);
-		return "setdiet";
-	}
+	
 	@PostMapping("insertdiet")
 	public String insetdiet(@RequestParam("date") String date, Diet diet, HttpSession session, Model model) {
 		int UID = (Integer)session.getAttribute("UID");
@@ -57,12 +51,6 @@ public class DietController {
 		return "mainpage";
 	}
 	
-	@GetMapping("/Todayweight")
-	public String Todayweight(@RequestParam("year") int year, @RequestParam("month") int month, @RequestParam("day") int day, Model model) {
-		LocalDate Date = LocalDate.of(year, month, day);
-		model.addAttribute("TODAY", Date.toString());
-		return "Todayweight";
-	}
 	@PostMapping("insertW")
 	public String insetW(@RequestParam("weight") float weight, @RequestParam("time") String time, HttpSession session) {
 		int UID = (Integer)session.getAttribute("UID");
@@ -74,6 +62,10 @@ public class DietController {
 			return "redirect:/mainpage";
 		}
 	}
-	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "Login";
+	}
 	
 }

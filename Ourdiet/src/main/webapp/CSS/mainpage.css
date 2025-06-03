@@ -1,0 +1,226 @@
+body {
+  	background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  	font-family: 'Noto Sans KR', sans-serif;
+  	color: #222;
+  	font-size: 1rem;
+  	line-height: 1.7;
+  	margin: 0;
+  	padding: 0;
+  	min-height: 100vh;
+}
+
+.All-display {
+  	display: flex;
+  	min-height: 100vh;
+}
+
+.diet-box {
+  	max-width: 1000px;
+  	margin: 40px auto 0 auto;
+  	padding: 36px 32px 32px 32px;
+  	background: #f8ece3;
+  	border-radius: 18px;
+  	box-shadow: 0 8px 32px rgba(76,175,80,0.10), 0 1.5px 8px rgba(0,0,0,0.04);
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+}
+
+.date-box {
+  	background: #fff;
+  	width: 40%;
+  	justify-content: center;
+  	border-radius: 10px;
+  	box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  	padding: 16px 24px;
+  	display: flex;
+  	align-items: center;
+  	gap: 12px;
+  	margin-bottom: 28px;
+}
+
+.date-label {
+  	font-weight: 600;
+  	color: #388e3c;
+  	margin-right: 8px;
+}
+
+.date-select {  
+  	appearance: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	background: #fff;
+  	border: 1.5px solid #c8e6c9;
+  	border-radius: 8px;
+  	padding: 10px 38px 10px 14px;
+  	font-size: 1rem;
+  	color: #222;
+  	margin-right: 8px;
+  	box-shadow: 0 2px 8px rgba(76,175,80,0.06);
+  	transition: border 0.2s;
+}
+.date-select:focus {
+  	border-color: #4caf50;
+  	outline: none;
+}
+
+.weight-box {
+  	background: #fff;
+  	align-items: center;
+  	justify-content: center;
+  	text-align: center;
+  	width: 50%;
+  	border-radius: 12px;
+  	box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  	padding: 20px 32px;
+  	margin-bottom: 24px;
+  	display: flex;
+  	flex-direction: column;
+  	gap: 10px;
+}
+
+.weight-box h2 {
+  	font-size: 1.6rem;
+  	color: #388e3c;
+  	margin: 0 0 6px 0;
+}
+
+.weight-box h2 a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.weight-info {
+  	font-size: 1.1rem;
+  	color: #222;
+  	font-weight: 500;
+}
+
+.weight-msg {
+  	font-size: 1rem;
+  	color: #388e3c;
+  	margin-top: 4px;
+}
+
+.food-3 {
+  	display: flex;
+  	gap: 18px;
+  	margin-bottom: 28px;
+  	justify-content: center;
+}
+
+.food-card {
+  	background: #fff;
+  	border-radius: 12px;
+  	box-shadow: 0 4px 16px rgba(76,175,80,0.10);
+  	flex: 1 1 0;
+  	min-width: 300px;
+  	max-width: 300px;
+  	width: 300px;
+  	padding: 18px 16px;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: stretch;
+}
+.food-card h2 {
+  	font-size: 1.6rem;
+  	color: black;
+  	margin-bottom: 12px;
+  	text-align: center;
+}
+
+.food-card h2 a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.food-list {
+  	list-style: none;
+  	padding: 0;
+  	margin: 0;
+}
+.food-li {
+  	background: #f1f8e9;
+  	border-radius: 7px;
+  	margin-bottom: 10px;
+  	padding: 10px 14px;
+  	display: flex;
+  	justify-content: space-between;
+  	align-items: center;
+  	font-size: 1rem;
+  	box-shadow: 0 1px 4px rgba(76,175,80,0.08);
+  	font-weight: 500;
+}
+.food-li:last-child { margin-bottom: 0; }
+
+.food-null {
+  	background: #ffe0b2;
+  	border-radius: 7px;
+  	margin-bottom: 10px;
+  	padding: 10px 14px;
+  	display: flex;
+  	color: #bdbdbd;
+  	text-align: center;
+  	align-items: center;
+  	font-size: 1rem;
+  	font-weight: 500;
+  	justify-content: center;
+}
+
+.food-cal {
+  	margin-top: 8px;
+  	font-weight: 600;
+  	color: #388e3c;
+  	text-align: right;
+}
+
+.total-box {
+  	width: 50%;
+  	background: #e8f5e9;
+  	border-radius: 12px;
+  	box-shadow: 0 2px 8px #4CAF5012;
+  	padding: 20px 30px;
+  	margin-top: 18px;
+  	font-size: 1.08rem;
+  	display: flex;
+  	flex-direction: column;
+  	gap: 12px;
+}
+.total-item {
+  	display: flex;
+  	align-items: baseline;
+  	gap: 10px;
+  	font-size: 1.12rem;
+  	font-weight: 600;
+}
+.total-label { color: #388e3c; min-width: 100px; }
+.total-value { color: #222; }
+.total-recommend { color: #888; font-size: 1rem; }
+
+.gaugebar-box {
+  	display: flex;
+  	align-items: center;
+  	gap: 12px;
+  	margin-bottom: 8px;
+}
+.gaugebar-total {
+  	background: #c8e6c9;
+  	border-radius: 7px;
+  	width: 60%;
+  	height: 12px;
+  	position: relative;
+  	overflow: hidden;
+}
+.gaugebar-fill {
+  	background: linear-gradient(to right, #4caf50, #81c784);
+  	height: 100%;
+  	border-radius: 7px;
+  	width: 0;
+  	transition: width 0.6s;
+}
+.gaugebar-percent {
+  	font-size: 1rem;
+  	color: #388e3c;
+  	font-weight: 700;
+}
+

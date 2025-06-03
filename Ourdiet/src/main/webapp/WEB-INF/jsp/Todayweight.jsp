@@ -1,19 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
-<html>
-<%
-	String STR = (String)request.getAttribute("TODAY");
-	LocalDate TODAY = LocalDate.parse(STR);
-%>
-<head><title>오늘의 몸무게</title></head>
-<body>
-	<h1>몸무게 설정</h1>
-	<p>날짜 : <%=TODAY%>
-	<form action="insertW" method="post">
-		<input type="number" name="weight" placeholder="오늘의 체중을 적어주세요!" step="0.1" min="0" value="0" required>
-		<input type="hidden" name="time" value="<%=TODAY %>">
-		<input type="submit" value="설정">
-	</form>
-</body>
-</html>
+<div id="weight-modal" class="weight-modal" style="display:none;">
+	<form action="insertW" method="post" class="modal-box">
+		<h2>몸무게 설정</h2>
+		<B><span id="weight-modal-date"></span></B>
+		<input type="number" id="weight" name="weight" placeholder="오늘의 체중을 적어주세요!" step="0.1" min="0" value="0" required>
+		<input type="hidden" id="time" name="time" value="">
+		<div class="modal-btn">
+			<button type="submit" class="modal-submit">등록</button>
+			<button type="button" class="modal-close" onClick="closeWeightModal()">취소</button>
+		</div>
+	</form> 
+</div>
+	
