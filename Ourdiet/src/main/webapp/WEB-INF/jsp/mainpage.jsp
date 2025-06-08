@@ -6,15 +6,6 @@
 <!DOCTYPE html>
 <html>
 <%
-	if (request.getAttribute("insetdiet_err") != null) {
-%>
-<script>alert(insertdiet_err);</script>
-<%}%>
-<%
-	if (request.getAttribute("dietcomplete") != null) {
-%>
-<script>alert(dietcomplete);</script>
-<%} 
 	LocalDate today = LocalDate.now();
 	int nowyear = today.getYear();
 	int nowmonth = today.getMonthValue();

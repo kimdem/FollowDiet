@@ -1,0 +1,176 @@
+body {
+  	background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  	font-family: 'Noto Sans KR', sans-serif;
+  	color: #222;
+  	font-size: 1rem;
+  	line-height: 1.7;
+  	margin: 0;
+  	padding: 0;
+  	min-height: 100vh;
+}
+
+.All-display {
+  	display: flex;
+  	min-height: 100vh;
+}
+
+h1 {
+  	color: #388e3c;
+  	text-align: center;
+  	margin-top: 0px;
+}
+
+.totalcard {
+  	display: flex;
+  	flex-wrap: wrap;
+  	gap: 24px 18px;
+  	justify-content: center;
+  	margin: 32px 0 24px 0;
+}
+
+.total-day {
+  	background: #fff;
+  	border-radius: 14px;
+ 	box-shadow: 0 2px 12px rgba(56, 142, 60, 0.10);
+  	padding: 18px 20px 16px 20px;
+  	width: 220px;
+  	min-width: 180px;
+  	max-width: 90vw;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: flex-start;
+  	transition: box-shadow 0.2s;
+}
+
+.total-day:hover {
+  	box-shadow: 0 4px 24px rgba(56, 142, 60, 0.18);
+}
+
+.total-whatday {
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 100%;
+  	font-weight: bold;
+  	color: #388e3c;
+  	font-size: 1.08rem;
+  	margin-bottom: 10px;
+}
+
+.totalinfo {
+  	font-size: 0.98rem;
+  	color: #333;
+  	display: flex;
+  	flex-direction: column;
+  	gap: 3px;
+}
+
+.total-span {
+  	display: inline-block;
+  	min-width: 60px;
+  	color: #7cb342;
+  	font-size: 0.95em;
+  	margin-right: 20px;
+}
+
+.analysis {
+  	width: 100%;
+  	border-collapse: collapse;
+  	margin: 36px auto 0 auto;
+  	font-size: 1rem;
+  	max-width: 700px;
+  	background: #f9fcf7;
+ 	border-radius: 12px;
+  	overflow: hidden;
+  	box-shadow: 0 2px 12px rgba(56, 142, 60, 0.07);
+}
+
+.analysis th, .analysis td {
+  	border: 1.5px solid #b2ccb4;
+  	padding: 12px 18px;
+  	text-align: center;
+}
+
+.analysis th {
+  	background: #e0f2e0;
+  	color: #388e3c; 
+  	font-weight: 500;
+  	font-size: 1.08rem;
+}
+
+.analysis td {
+  	color: #222;
+  	font-size: 1.07rem;
+  	font-weight: 500;
+}
+
+.analysis tr:nth-child(even) {
+  	background: #f7faf7;
+}
+
+.analysise tr:nth-child(odd) {
+  	background: #fff;
+}
+
+.chart {
+  	color: #388e3c;
+  	margin: 38px 0 18px 0;
+  	text-align: center;
+  	font-size: 1.25rem;
+  	font-weight: bold;
+}
+
+
+.date-box {
+  	background: #fff;
+  	width: 20%;
+  	margin-top: 20px;
+  	justify-content: center;
+  	border-radius: 10px;
+  	box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  	padding: 16px 24px;
+  	display: flex;
+  	align-items: center;
+  	gap: 12px;
+  	margin-bottom: 28px;
+}
+
+.date-label {
+  	font-weight: 600;
+  	color: #388e3c;
+  	margin-right: 20px;
+}
+
+.date-select {  
+  	appearance: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	background: #fff;
+  	border: 1.5px solid #c8e6c9;
+  	border-radius: 8px;
+  	padding: 10px 38px 10px 14px;
+  	font-size: 1rem;
+  	color: #222;
+  	margin-right: 8px;
+  	box-shadow: 0 2px 8px rgba(76,175,80,0.06);
+  	transition: border 0.2s;
+}
+
+.date-select:focus {
+  	border-color: #4caf50;
+  	outline: none;
+}
+
+.totalbox {
+	margin-left: 240px;
+  	flex: 1;
+  	padding: 32px 24px;
+  	box-sizing: border-box
+}
+
+.aligncenter {
+  	display: flex;
+  	justify-content: center;
+  	width: 100%;
+}

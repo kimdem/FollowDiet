@@ -27,4 +27,23 @@ public class MemberRegisterService {
 		return memberDao.outGoal(UID);
 	}
 	
+	public profile_info info(int UID) {
+		profile_info data = memberDao.info(UID);
+		return data;
+	}
+	
+	public boolean checking_pwd(int UID, String pwd, String newpwd, String confirmpwd) {
+		String User_pwd = memberDao.user_pwd(UID);
+		if(pwd.equals(User_pwd) && newpwd.equals(confirmpwd)) {
+			memberDao.edit_pwd(UID, newpwd);
+			return true;
+		} else {return false;}
+	}
+	
+	public boolean pwd_valid(String pwd) {
+		String pwdreg = "^(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%*?&+])[A-Za-z\\d!@#$%*?&+]{8,16}$";
+		if(!pwd.matches(pwdreg)) {
+			return false;
+		} else {return true;}
+	}
 }

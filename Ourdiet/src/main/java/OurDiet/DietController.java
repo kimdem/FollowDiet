@@ -27,7 +27,6 @@ public class DietController {
 		} catch (Exception ex) {
 			System.out.println("에러");
 			System.out.println(ex);
-			model.addAttribute("insetdiet_err", "오류발생");
 			return "redirect:/mainpage";
 		}
 	}

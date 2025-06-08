@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <%
@@ -18,58 +18,65 @@
         }
     } //0이 감량
 %>
-<h3>주간 칼로리 섭취량</h3>
-<canvas id="calrory" width="600" height="300"></canvas><br>
-<ul><%
-	for (int i=0; i<7; i++) {
-		float c = week_info1[i][0];
-		if(goal == 0) {
-			if(c > total1[4]) {
-	%>
-		<li><%=week[i]%>요일의 섭취량이 평균치보다 <%=String.format("%.1f",c-total1[4])%>Kcal 만큼 높게 섭취하셨습니다.</li>
-<%
-		}
-	} else {
-		if(c < total1[4]) {
-%>
-			<li><%=week[i]%>요일의 섭취량이 평균치보다 <%=String.format("%.1f",total1[4]-c)%>Kcal 만큼 적게 섭취하셨습니다.</li>
-<%			
-		}
-	}
-}%></ul><br>
-
-<h3>주간 체중 변화</h3>
-<canvas id="weight" width="600" height="300"></canvas><br>
-<ul><%
-	for(int i=0; i<7; i++) {
-		float w = week_info1[i][4];
-		if(goal == 0) {
-			if(w != 0 && w <= W_weight) {
-	%>
-		<li><%=week[i]%>요일에 목표 체중을 달성하셨습니다! 이대로 유지해주세요</li>
-<%
+<div class="chart-box">
+	<div class="chart-section">
+		<h3>주간 칼로리 섭취량</h3>
+		<canvas id="calrory" width="600" height="300"></canvas><br>
+		<ul><%
+			for (int i=0; i<7; i++) {
+				float c = week_info1[i][0];
+				if(goal == 0) {
+					if(c > total1[4]) {
+			%>
+				<li><%=week[i]%>요일의 섭취량이 평균치보다 <%=String.format("%.1f",c-total1[4])%>Kcal 만큼 높게 섭취하셨습니다.</li>
+		<%
+				}
+			} else {
+				if(c < total1[4]) {
+		%>
+					<li><%=week[i]%>요일의 섭취량이 평균치보다 <%=String.format("%.1f",total1[4]-c)%>Kcal 만큼 적게 섭취하셨습니다.</li>
+		<%			
+				}
 			}
-		}else {
-			if(w != 0 && w >= W_weight) {
-%>
-		<li><%=week[i]%>요일에 목표 체중을 달성하셨습니다! 이대로 유지해주세요</li>
-<%
-		}
-	}
-}%></ul>
-
-<h3>주간 탄 / 단 / 지 섭취율</h3>
-<canvas id="tandanji" width="600" height="300"></canvas><br>
-<%if(total1[1] + total1[2] + total1[3] != 0) {
-	if(goal == 0) {
-%>
-	<p>현재 설정된 권장 섭취량은 다음과 같습니다.</p>
-	<p>탄수화물: 50% || 단백질: 30% || 지방: 20%</p>
-<%}else {%>
-	<p>현재 설정된 권장 섭취량은 다음과 같습니다.</p>
-	<p>탄수화물: 55% || 단백질: 15% || 지방: 30%</p>
-<%}}%>
-
+		}%></ul><br>
+	</div>
+	
+	<div class="chart-section">
+		<h3>주간 체중 변화</h3>
+		<canvas id="weight" width="600" height="300"></canvas><br>
+		<ul><%
+			for(int i=0; i<7; i++) {
+				float w = week_info1[i][4];
+				if(goal == 0) {
+					if(w != 0 && w <= W_weight) {
+			%>
+				<li><%=week[i]%>요일에 목표 체중을 달성하셨습니다! 이대로 유지해주세요</li>
+		<%
+					}
+				}else {
+					if(w != 0 && w >= W_weight) {
+		%>
+				<li><%=week[i]%>요일에 목표 체중을 달성하셨습니다! 이대로 유지해주세요</li>
+		<%
+				}
+			}
+		}%></ul>
+	</div>
+	
+	<div class="chart-section">
+		<h3>주간 탄 / 단 / 지 섭취율</h3>
+		<canvas id="tandanji" width="600" height="300"></canvas><br>
+		<%if(total1[1] + total1[2] + total1[3] != 0) {
+			if(goal == 0) {
+		%>
+			<p style="color: #4caf50; font-size: 24	px;">현재 설정된 권장 섭취량은 다음과 같습니다.</p>
+			<p><B>탄수화물: 50%</B> | <B>단백질: 30%</B> | <B>지방: 20%</B></p>
+		<%}else {%>
+			<p>현재 설정된 권장 섭취량은 다음과 같습니다.</p>
+			<p><B>탄수화물: 55%</B> | <B>단백질: 15%</B> | <B>지방: 30%</B></p>
+		<%}}%>
+	</div>
+</div>
 <script>
 const calrory = document.getElementById("calrory").getContext("2d");
 const tandanji = document.getElementById("tandanji").getContext("2d")

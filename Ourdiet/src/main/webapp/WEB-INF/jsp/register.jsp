@@ -42,7 +42,7 @@
 			</div>
 			<p>키</p>
 			<input type="number" min="0" step="0.1" name="Tall" placeholder="키(숫자만)" required>
-			<p>몸 무게</p>
+			<p>현재 체중</p>
 			<input type="number" min="0" step="0.1" name="Weight" placeholder="몸 무게(숫자만)" required>
 			<p>목표 체중</p>
 			<input type="number" min="0" step="0.1" name="WantedWeight" placeholder="목표(숫자만)" required>

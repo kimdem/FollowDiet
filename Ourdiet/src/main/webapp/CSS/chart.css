@@ -1,0 +1,56 @@
+.chart-box {
+  	display: flex;
+  	flex-wrap: wrap;
+  	gap: 32px 24px;
+  	justify-content: center;
+  	margin: 40px 0 32px 0;
+}
+
+.chart-section {
+  	background: #fff;
+  	border-radius: 14px;
+  	box-shadow: 0 2px 12px rgba(56, 142, 60, 0.10);
+  	padding: 24px 24px 18px 24px;
+  	min-width: 320px;
+  	width: 50%;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+}
+
+.chart-section h3 {
+  	color: #388e3c;
+  	margin-bottom: 18px;
+  	font-size: 1.15rem;
+  	font-weight: bold;
+}
+
+.chart-section canvas {
+  	display: block;
+  	width: 600px !important;
+  	height: 300px !important;
+  	margin-bottom: 16px;
+  	background: #f7faf7;
+  	border-radius: 10px;
+  	box-shadow: 0 2px 8px rgba(76,175,80,0.06);
+}
+
+.chart-section ul {
+  	width: 100%;
+  	margin: 0;
+  	margin-top: 10px;
+  	color: #222;
+  	font-size: 0.98rem;
+  	margin-left: 30%;
+  	padding-left: 18px;
+}
+
+.chart-section p {
+	width: 100%;
+  	margin: 0;
+  	margin-top: 10px;
+  	color: #222;
+  	font-size: 0.98rem;
+  	padding-left: 18px;
+  	text-align: center;
+}

@@ -194,7 +194,9 @@ body {
   	font-weight: 600;
 }
 .total-label { color: #388e3c; min-width: 100px; }
+
 .total-value { color: #222; }
+
 .total-recommend { color: #888; font-size: 1rem; }
 
 .gaugebar-box {

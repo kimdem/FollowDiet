@@ -1,57 +1,65 @@
-<%@ page language="java" contentType="text/html;charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.time.LocalDate" %>
 <%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
-<head><title>통계보기</title></head>
+<head>
+	<title>통계보기</title>
+	<link rel="stylesheet" href="/CSS/report.css">
+	<link rel="stylesheet" href="/CSS/sidebar.css">
+	<link rel="stylesheet" href="/CSS/chart.css">
+</head>
 <body>
-	<h1>통계</h1><hr>
-	<form action="#" method="GET">
-		<label for="date">주차선택 </label><br>
-		<select name="date" id="date" onchange="this.form.submit()">
-			<%
-				float[][] week_info = (float[][])request.getAttribute("week_info");
-				float[] total = (float[])request.getAttribute("total");
-				String[] printweek = {"월", "화", "수", "목", "금", "토", "일"};
-				LocalDate jspdate = (LocalDate)request.getAttribute("jspdate");
-				List<LocalDate> M_list = (List<LocalDate>)request.getAttribute("M_list");
-				for(LocalDate monday : M_list) {
-					String select = monday.equals(jspdate) ? "selected" : "";
-			%>
-			<option value="<%=monday%>" <%=select%>>
-				<%=monday%> ~ <%=monday.plusDays(6)%>
-			</option>
-			<%}%>
-		</select>
-	</form>
-	<%
-		for(int i = 0; i<7; i++) {
-	%>
-		<h1><%=jspdate.plusDays(i)%> (<%=printweek[i]%>)</h1>
-	<table border="1">
-		<tr>
-			<th></th>
-			<th>칼로리</th>
-			<th>탄수화물</th>
-			<th>단백질</th>
-			<th>지방</th>
-		</tr>
-		<tr>
-			<th>총합</th>
-			<th><%=week_info[i][0]%> Kcal</th>
-			<th><%=week_info[i][1]%> g</th>
-			<th><%=week_info[i][2]%> g</th>
-			<th><%=week_info[i][3]%> g</th>
-		</tr>
-	</table><br><br>
-	<%}%>
-	<p>차트분석
-	<%@ include file="report_chart.jsp" %>
+<div class="All-display">
+<%@ include file="sidebar.jsp" %>
+<div class="totalbox">
+	<h1><B>통계</B></h1><hr>
+	<div class="aligncenter">
+		<div class="date-box">
+			<form action="#" method="GET">
+			<label for="date" class="date-label">주차선택</label>
+			<select name="date" id="date" class="date-select" onchange="this.form.submit()">
+				<%
+					float[][] week_info = (float[][])request.getAttribute("week_info");
+					float[] total = (float[])request.getAttribute("total");
+					String[] printweek = {"월", "화", "수", "목", "금", "토", "일"};
+					LocalDate jspdate = (LocalDate)request.getAttribute("jspdate");
+					List<LocalDate> M_list = (List<LocalDate>)request.getAttribute("M_list");
+					for(LocalDate monday : M_list) {
+						String select = monday.equals(jspdate) ? "selected" : "";
+				%>
+				<option value="<%=monday%>" <%=select%>>
+					<%=monday%> ~ <%=monday.plusDays(6)%>
+				</option>
+				<%}%>
+			</select>
+		</form>
+	</div>
+	</div>
+	<div class="totalcard">
+		<%
+			for(int i = 0; i<7; i++) {
+		%>
+		<div class="total-day">
+			<div class="total-whatday">
+				<%=jspdate.plusDays(i)%> (<%=printweek[i]%>)
+			</div>
+			<div class="totalinfo">
+				<div><span class="total-span">칼로리</span><B><%=week_info[i][0] %></B> Kcal</div>
+				<div><span class="total-span">탄수화물</span><B><%=week_info[i][0] %></B> g</div>
+				<div><span class="total-span">단백질</span><B><%=week_info[i][0] %></B> g</div>
+				<div><span class="total-span">지방</span><B><%=week_info[i][0] %></B> g</div>
+			</div>
+		</div>
+		<%}%>
+	</div>
 	
-	
-	<hr><br>
-	<h1>주간 정산</h1><br><br>
-	<table border="1">
+	 <div class="chart">차트 분석</div>
+	 <div class="aligncenter">
+	 	<%@ include file="report_chart.jsp" %>
+	 </div>
+	<div class="chart">주간 정산</div>
+	<table class="analysis">
 	<tr>
 		<th>주간 섭취량</th>
 		<th>칼로리</th>
@@ -85,6 +93,7 @@
 		<%}%>
 	</tr>
 	</table>
-	<% %>
+	</div>
+</div>
 </body>
 </html>

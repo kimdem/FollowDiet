@@ -1,0 +1,117 @@
+body {
+  	background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  	font-family: 'Noto Sans KR', sans-serif;
+  	color: #222;
+  	font-size: 1rem;
+  	line-height: 1.7;
+  	margin: 0;
+  	padding: 0;
+  	min-height: 100vh;
+}
+
+.All-display {
+  	display: flex;
+  	min-height: 100vh;
+}
+
+.profile-box {
+ 	max-width: 420px;
+  	margin: 48px auto 0 auto;
+  	background: #fff;
+  	border-radius: 16px;
+  	box-shadow: 0 2px 16px rgba(56, 142, 60, 0.11);
+  	padding: 36px 32px 28px 32px;
+}
+
+h1 {
+  	text-align: center;
+  	color: #388e3c;
+  	margin-bottom: 28px;
+  	font-size: 1.5rem;
+}
+
+.profile-formtag {
+  	display: flex;
+  	flex-direction: column;
+  	gap: 18px;
+}
+
+.form-label {
+  	display: flex;
+  	align-items: center;
+  	gap: 12px;
+}
+
+.form-label label {
+  	min-width: 110px;
+  	font-weight: 600;
+  	color: #388e3c;
+}
+
+.form-label input[type="number"],
+.form-label input[type="text"] {
+  	flex: 1;
+  	padding: 9px 14px;
+  	border: 2px solid #cdeac0;
+  	border-radius: 8px;
+  	font-size: 1rem;
+  	background: #f7faf7;
+  	transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-label input:focus {
+  	border-color: #388e3c;
+  	box-shadow: 0 0 0 2px #e0f2e0;
+}
+
+.form-label span {
+  	font-size: 1.04rem;
+  	color: #222;
+}
+
+.profile-formtag .form-radio {
+  	display: flex;
+  	flex-direction: column;
+  	gap: 6px;
+  	margin-top: 10px;
+  	margin-bottom: 8px;
+}	
+
+.profile-formtag .form-radio label {
+  	font-weight: 500;
+  	color: black;
+  	margin-right: 16px;
+}
+
+.profile-formtag .form-radio span {
+	min-width: 110px;
+    font-weight: 600;
+    color: #388e3c;
+}
+
+.profile-formtag input[type="submit"],
+.profile-formtag button[type="button"] {
+  	background: #388e3c;
+  	color: #fff;
+  	border: none;
+  	padding: 11px 0;
+  	border-radius: 8px;
+  	font-weight: bold;
+  	font-size: 1.08rem;
+  	cursor: pointer;
+  	margin-top: 18px;
+  	transition: background 0.2s;
+  	width: 100%;
+}
+
+.profile-formtag input[type="submit"]:hover,
+.profile-formtag button[type="button"]:hover {
+  	background: #2e7031;
+}
+
+.totalbox {
+	margin-left: 240px;
+  	flex: 1;
+  	padding: 32px 24px;
+  	box-sizing: border-box
+}

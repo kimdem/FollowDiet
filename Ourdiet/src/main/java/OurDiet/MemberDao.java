@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+
 public class MemberDao {
 	private JdbcTemplate jdbcTemplate;
 	public MemberDao(DataSource dataSource) {
@@ -82,4 +83,33 @@ public class MemberDao {
 		String sql = "SELECT goal FROM user WHERE User_id=?";
 		return jdbcTemplate.queryForObject(sql, Integer.class, UID);
 	}
+	
+	public profile_info info(int UID) {
+		String sql = "SELECT ID, Age, Tall, Weight, WantedWeight, gender FROM user WHERE User_id=?";
+		List<profile_info> info = jdbcTemplate.query(sql,
+			(ResultSet rs, int rowNum) -> {
+				profile_info list = new profile_info(
+						rs.getString("ID"),
+						rs.getInt("Age"),
+						rs.getFloat("Tall"),
+						rs.getFloat("Weight"),
+						rs.getFloat("WantedWeight"),
+						rs.getInt("gender")
+				);
+				return list;
+			}, UID);
+		profile_info result = info.get(0);
+		return result;
+	}
+	
+	public String user_pwd(int UID) {
+		String sql = "SELECT PWD FROM user WHERE User_id =?";
+		return jdbcTemplate.queryForObject(sql, String.class, UID);
+	}
+	
+	public void edit_pwd(int UID, String pwd) {
+		String sql = "UPDATE user SET PWD=? WHERE User_id=?";
+		jdbcTemplate.update(sql, pwd, UID);
+	}
+	
 }
