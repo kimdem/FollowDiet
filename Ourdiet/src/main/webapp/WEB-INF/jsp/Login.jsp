@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=utf-8" %>
 <html>
-<%
-	if (request.getAttribute("failedLogin") != null) {
-%>
-<script>
-	alert("<%=request.getAttribute("failedLogin") %>");
-</script><%} %>
+<%if (request.getAttribute("failedLogin") != null) {%><script>alert("<%=request.getAttribute("failedLogin") %>");</script><%}%>
 <head>
 	<title>로그인</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">

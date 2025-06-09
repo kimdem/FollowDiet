@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dto;
 
 public class LoginMember {
 	private String Login_ID;

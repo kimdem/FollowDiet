@@ -1,8 +1,10 @@
-package OurDiet;
+package OurDiet.service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import OurDiet.dao.ReportDao;
 
 public class ReportService {
 	private ReportDao reportdao;

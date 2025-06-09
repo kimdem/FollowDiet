@@ -2,6 +2,13 @@ package OurDiet;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import OurDiet.dao.DietDao;
+import OurDiet.dao.MemberDao;
+import OurDiet.dao.ReportDao;
+import OurDiet.service.DietService;
+import OurDiet.service.MemberRegisterService;
+import OurDiet.service.ReportService;
 @Configuration
 public class BeanConfig {
 	@Bean(destroyMethod = "close")

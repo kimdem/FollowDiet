@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dto;
 public class Member {
 	private String ID;
 	private String PWD;

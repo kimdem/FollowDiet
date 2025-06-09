@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.controller;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,7 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import OurDiet.dao.MemberDao;
+import OurDiet.dto.Diet;
+import OurDiet.dto.dietlist;
+import OurDiet.service.DietService;
 import jakarta.servlet.http.HttpSession;
 @Controller
 public class DietController {
@@ -18,16 +23,20 @@ public class DietController {
 	public MemberDao memberdao;
 	
 	@PostMapping("insertdiet")
-	public String insetdiet(@RequestParam("date") String date, Diet diet, HttpSession session, Model model) {
-		int UID = (Integer)session.getAttribute("UID");
+	public String insetdiet(@RequestParam("date") String date, Diet diet, HttpSession session, RedirectAttributes red) {
+		Integer UID = (Integer)session.getAttribute("UID");
+		if(UID == null) {return "redirect:/Login";}
 		try {
-			dietservice.insetdiet(diet, session, date);
+			if((diet.getFood()).length() > 100) {
+				red.addFlashAttribute("too_long_name", "음식의 이름이 너무 깁니다.");
+				return "redirect:/mainpage";
+			}
+			dietservice.insetdiet(diet, UID, date);
 			dietservice.info_insert(UID, diet, date);
 			return "redirect:/mainpage";
 		} catch (Exception ex) {
-			System.out.println("에러");
-			System.out.println(ex);
-			return "redirect:/mainpage";
+			System.out.println("에러 : " + ex);
+			return "redirect:/errorpage";
 		}
 	}
 	@GetMapping("/mainpage")
@@ -40,25 +49,29 @@ public class DietController {
 	    
 		Integer UID = (Integer)session.getAttribute("UID");
 		Integer goal = (Integer)session.getAttribute("goal");
-		if(UID == null) {return "Login";}
-		dietlist _dietlist = dietservice._dietlist(UID, selectedDate);
-		Object[] weights = dietservice.print_W(UID, selectedDate, goal);
-		double[] recommend = dietservice.Recommend(UID, goal, selectedDate);
-		model.addAttribute("recommend", recommend);
-		model.addAttribute("dietlist", _dietlist);
-		model.addAttribute("weights", weights);
-		return "mainpage";
+		if(UID == null) {return "redirect:/Login";}
+		try {
+			dietlist _dietlist = dietservice._dietlist(UID, selectedDate);
+			Object[] weights = dietservice.print_W(UID, selectedDate, goal);
+			double[] recommend = dietservice.Recommend(UID, goal, selectedDate);
+			model.addAttribute("recommend", recommend);
+			model.addAttribute("dietlist", _dietlist);
+			model.addAttribute("weights", weights);
+			return "mainpage";
+		} catch (Exception ex) {
+			return "redirect:/errorpage";
+		}
 	}
 	
 	@PostMapping("insertW")
 	public String insetW(@RequestParam("weight") float weight, @RequestParam("time") String time, HttpSession session) {
-		int UID = (Integer)session.getAttribute("UID");
+		Integer UID = (Integer)session.getAttribute("UID");
+		if(UID == null) {return "redirect:/Login";}
 		try {
 			dietservice.weight_insert(UID, weight, time);
 			return "redirect:/mainpage";
 		} catch(Exception ex) {
-			ex.printStackTrace();
-			return "redirect:/mainpage";
+			return "redirect:/errorpage";
 		}
 	}
 	@GetMapping("logout")

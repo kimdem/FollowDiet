@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dto;
 
 import java.util.List;
 

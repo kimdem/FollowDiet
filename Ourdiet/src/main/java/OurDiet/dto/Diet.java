@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dto;
 
 public class Diet {
 	private int level;

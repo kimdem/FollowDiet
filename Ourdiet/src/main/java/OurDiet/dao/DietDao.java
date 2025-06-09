@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +11,14 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
+import OurDiet.dto.Diet;
 import jakarta.servlet.http.HttpSession;
 public class DietDao {
 	private JdbcTemplate jdbcTemplate;
 	public DietDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	public void insert(Diet diet, HttpSession session, String date) {
-		Integer UID = (Integer)session.getAttribute("UID");
+	public void insert(Diet diet, int UID, String date) {
 		try {
 			jdbcTemplate.update(
 					new PreparedStatementCreator() {

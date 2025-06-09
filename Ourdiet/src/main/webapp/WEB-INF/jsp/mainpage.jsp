@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="OurDiet.dietlist" %>
-<%@ page import="OurDiet.Diet" %>
+<%@ page import="OurDiet.dto.dietlist" %>
+<%@ page import="OurDiet.dto.Diet" %>
 <%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
+<%if(request.getAttribute("too_long_name") != null) {%><script>alert("<%=request.getAttribute("too_long_name")%>")</script><%}%>
 <%
 	LocalDate today = LocalDate.now();
 	int nowyear = today.getYear();
@@ -14,9 +15,11 @@
 	String yearP = request.getParameter("year");
     String monthP = request.getParameter("month");
     String dayP = request.getParameter("day");
+    
     int selectedyear = yearP != null ? Integer.parseInt(yearP) : nowyear;
     int selectedmonth = monthP != null ? Integer.parseInt(monthP) : nowmonth;
     int selectedday = dayP!= null ? Integer.parseInt(dayP) : nowday;
+    
     boolean yearok = selectedyear == nowyear;
     boolean monthok = selectedmonth == nowmonth && yearok;
     
@@ -34,13 +37,6 @@
 	<link rel="stylesheet" href="/CSS/mainpage.css">
 	<link rel="stylesheet" href="/CSS/sidebar.css">
 	<link rel="stylesheet" href="/CSS/Modal.css">
-	<script>
-		function logout() {
-			if(window.confirm("정말 로그아웃 하시겠습니까?")) {
-				window.location.href="logout";
-			}
-		}
-	</script>
 </head>
 <body>
 <h1 style="text-align: center; color: #388e3c"><B>식단 관리</B></h1><hr><br>
@@ -51,36 +47,32 @@
 			<form action="#" method="GET">
 			<label class="date-label">날짜 선택 : </label>
 			<select class="date-select" name="year" onChange="this.form.submit()">
-				<%
-					for(int y = nowyear-10; y <= nowyear; y++) {
-				%>
-					<option value="<%=y %>" <%= (y==selectedyear ? "selected" : "") %>>
-					<%=y%>년</option>
+				<%for(int y = nowyear-10; y <= nowyear; y++) {%>
+					<option value="<%=y%>" <%=(y==selectedyear ? "selected" : "")%>> <%=y%>년</option>
 				<%}%>
 			</select>
 			
 			<select class="date-select" name="month" onChange="this.form.submit()">
 				<%
-					int maxM = (selectedyear == nowyear) ? nowmonth : 12;
+				int maxM = (selectedyear == nowyear) ? nowmonth : 12;
 					for(int m = 1; m<=maxM; m++) {
 				%>
-					<option value="<%=m%>" <%=(m==selectedmonth ? "selected" : "") %>>
-					<%=m%>월</option>
+					<option value="<%=m%>" <%=(m==selectedmonth ? "selected" : "")%>> <%=m%>월</option>
 				<%}%>
 			</select>
-			
+
 			<select class="date-select" name="day" onChange="this.form.submit()">
 				<%
-					int maxD = 31;
-					if(selectedmonth == 2) {
-						maxD = 28;
-					} else if(selectedmonth == 4 || selectedmonth == 6 || selectedmonth == 9 || selectedmonth == 11) {
-						maxD = 30;
-					}
-					if(monthok) {
-						maxD = nowday;
-					}
-					for(int d = 1; d <=maxD; d++) {
+				int maxD = 31;
+				if(selectedmonth == 2) {
+					maxD = 28;
+				} else if(selectedmonth == 4 || selectedmonth == 6 || selectedmonth == 9 || selectedmonth == 11) {
+					maxD = 30;
+				}
+				if(monthok) {
+					maxD = nowday;
+				}
+				for(int d = 1; d <=maxD; d++) {
 				%>
 					<option value="<%=d%>" <%=(d==selectedday ? "selected" : "")%>><%=d%>일</option> 
 				<%}%>
@@ -92,9 +84,13 @@
 		<h2><a href="#" onClick="openWeightModal('<%=Date.toString()%>')">오늘 몸무게</a></h2>
 		<div class="weight-info">
 		<%
-			if(Today_weight == 0.0) {%>미입력 / <span style="color: #388e3c; text-weight: bold;"><%=WantedWeight%> KG</span><%
-			}else {%> <%=Today_weight%> KG / <span style="color: #388e3c; text-weight: bold;"><%=WantedWeight%> KG</span>
-		<div class="weight-msg"><%=msg%></div><%}%>
+		if(Today_weight == 0.0) {
+		%>미입력 / <span style="color: #388e3c; text-weight: bold;"><%=WantedWeight%> KG</span><%
+		}else {
+		%> <%=Today_weight%> KG / <span style="color: #388e3c; text-weight: bold;"><%=WantedWeight%> KG</span>
+		<div class="weight-msg"><%=msg%></div><%
+		}
+		%>
 		</div>
 	</div>
 	<div class="food-3">
@@ -102,11 +98,11 @@
 		<h2><a href="#" onClick="openDietModal('<%=Date.toString()%>', 1)">아침</a></h2>
 		<ul class="food-list">
 		<%
-			float Calrorysum1 = 0, Calrorysum2 = 0, Calrorysum3 = 0;
+		float Calrorysum1 = 0, Calrorysum2 = 0, Calrorysum3 = 0;
 			float tan = 0, dan = 0, ji = 0;
-			OurDiet.dietlist todaylist = (OurDiet.dietlist)request.getAttribute("dietlist");
+			OurDiet.dto.dietlist todaylist = (OurDiet.dto.dietlist)request.getAttribute("dietlist");
 			if(todaylist != null) {
-				List<OurDiet.Diet> breakfastList = todaylist.getBreakfastList();
+				List<OurDiet.dto.Diet> breakfastList = todaylist.getBreakfastList();
 				if (breakfastList != null && !breakfastList.isEmpty()) {
 					for (Diet diet : breakfastList) {
 						Calrorysum1 += diet.getCalrory();
@@ -118,25 +114,25 @@
 				<span><%=diet.getFood()%></span>
 				<span><%=diet.getCalrory()%> Kcal</span>
 			</li>		
-		<%				
-					}
-				} else {
-		%>
-		<li class="food-li food-null">아직 공복이에요!</li>	
 		<%
 				}
+						} else {
+				%>
+		<li class="food-li food-null">아직 공복이에요!</li>	
+		<%
 			}
-		%>
+				}
+			%>
 		</ul>
-		<div class="food-cal">아침 식사 칼로리 : <%=Calrorysum1 %></div>
+		<div class="food-cal">아침 식사 칼로리 : <%=Calrorysum1%></div>
 	</div>
 	
 	<div class="food-card">
 		<h2><a href="#" onClick="openDietModal('<%=Date.toString()%>', 2)">점심</a></h2>
 		<ul class="food-list">
-		<%	
-			if(todaylist != null) {
-				List<OurDiet.Diet> lunchList = todaylist.getLunchList();
+		<%
+		if(todaylist != null) {
+				List<OurDiet.dto.Diet> lunchList = todaylist.getLunchList();
 				if (lunchList != null && !lunchList.isEmpty()) {
 					for (Diet diet : lunchList) {
 						Calrorysum2 += diet.getCalrory();
@@ -145,28 +141,28 @@
 						ji += diet.getJi();
 		%>
 			<li class="food-li">
-				<span>음식 : <%=diet.getFood() %></span>
+				<span>음식 : <%=diet.getFood()%></span>
 				<span><%=diet.getCalrory()%> Kcal</span>
 			</li>
 		<%
-					}
+		}
 				} else {
 		%>
 			<li class="food-li food-null">아직 공복이에요!</li>
 		<%
-				}
+		}
 			}
 		%>
 		</ul>
-		<div class="food-cal">점심 식사 칼로리 : <%=Calrorysum2 %></div>
+		<div class="food-cal">점심 식사 칼로리 : <%=Calrorysum2%></div>
 	</div>
 	
 	<div class="food-card">
 		<h2><a href="#" onClick="openDietModal('<%=Date.toString()%>', 3)">저녁</a></h2>
 		<ul class="food-list">
 		<%
-			if(todaylist != null) {
-				List<OurDiet.Diet> dinnerList = todaylist.getDinnerList();
+		if(todaylist != null) {
+				List<OurDiet.dto.Diet> dinnerList = todaylist.getDinnerList();
 				if(dinnerList != null && !dinnerList.isEmpty()) {
 					for (Diet diet : dinnerList) {
 						Calrorysum3 += diet.getCalrory();

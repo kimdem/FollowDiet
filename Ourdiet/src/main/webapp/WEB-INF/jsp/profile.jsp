@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <%if (request.getAttribute("pwd") != null) {%> <script>alert("<%=request.getAttribute("pwd")%>");</script><%}%>
+<%if (request.getAttribute("edit_complete") != null) {%> <script>alert("<%=request.getAttribute("edit_complete")%>");</script><%}%>
 <head>
 	<title>프로필</title>
 	<link rel="stylesheet" href="/CSS/profile.css">
@@ -12,9 +13,9 @@
 <div class="All-display">
 	<%@ include file="sidebar.jsp" %>
 <div class="totalbox">
-	<h1>내 프로필</h1><hr>
+	<h1><B>내 프로필</B></h1><hr>
 	<div class="profile-box">
-		<form action="#" method="POST" class="profile-formtag">
+		<form action="profile_edit" method="POST" class="profile-formtag">
 			<div class="form-label">
 				<label>ID : </label><span>${info.id}</span>
 			</div>
@@ -22,7 +23,7 @@
 				<label>PWD : </label><span><button type="button" onclick="openmodal()">비밀번호 변경하기</button></span>
 			</div>
 			<div class="form-label">
-				<label>나이 : </label><input type="number" name="age" step="0" min="0" value="${info.age}" placeholder="나이를 입력하세요">
+				<label>나이 : </label><input type="number" name="age" step="1" min="0" value="${info.age}" placeholder="나이를 입력하세요">
 			</div>
 			<div class="form-label">
 				<label>성별 : </label><span>${gender}</span>

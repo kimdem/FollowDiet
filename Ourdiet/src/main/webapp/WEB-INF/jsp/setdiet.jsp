@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
-<script src="/js/dietvalid.js"></script>
 <div id="diet-modal" class="diet-modal" style="display: none;">
 	<form action="insertdiet" name="insertdiet" method="post" class="modal-diet-box">
 		<h2><span id="meal"></span></h2>

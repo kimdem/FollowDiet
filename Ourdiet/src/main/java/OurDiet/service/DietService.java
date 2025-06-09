@@ -1,8 +1,11 @@
-package OurDiet;
+package OurDiet.service;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
+import OurDiet.dao.DietDao;
+import OurDiet.dto.Diet;
+import OurDiet.dto.dietlist;
 import jakarta.servlet.http.HttpSession;
 
 public class DietService {
@@ -11,8 +14,8 @@ public class DietService {
 		this.dietdao = dietdao;
 	}
 	
-	public void insetdiet(Diet diet, HttpSession session, String date) {
-		dietdao.insert(diet, session, date);
+	public void insetdiet(Diet diet, int UID, String date) {
+		dietdao.insert(diet, UID, date);
 	}
 	
 	public dietlist _dietlist(int User_id, LocalDate date) {

@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dto;
 
 public class profile_info {
 	private String id;

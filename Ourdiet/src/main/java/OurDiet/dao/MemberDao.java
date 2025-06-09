@@ -1,4 +1,4 @@
-package OurDiet;
+package OurDiet.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +8,11 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+
+import OurDiet.dto.LoginMember;
+import OurDiet.dto.Member;
+import OurDiet.dto.profile_edit;
+import OurDiet.dto.profile_info;
 
 public class MemberDao {
 	private JdbcTemplate jdbcTemplate;
@@ -101,6 +106,12 @@ public class MemberDao {
 		profile_info result = info.get(0);
 		return result;
 	}
+	
+	public void edit(int UID, profile_edit edit) {
+		String sql = "UPDATE user SET Age=?, Tall=?, Weight=?, WantedWeight=?, ex=? WHERE User_id=?";
+		jdbcTemplate.update(sql, edit.getAge(), edit.getTall(), edit.getWeight(), edit.getWantedweight(), edit.getEx(), UID);
+	}
+	
 	
 	public String user_pwd(int UID) {
 		String sql = "SELECT PWD FROM user WHERE User_id =?";

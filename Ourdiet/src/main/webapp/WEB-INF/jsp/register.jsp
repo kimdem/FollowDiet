@@ -2,22 +2,10 @@
 <!DOCTYPE html>
 <html>
 <script src="/js/valid.js"></script>
-<% if (request.getAttribute("IDX") != null) { %>
-<script>
-    alert("<%= request.getAttribute("IDX") %>");
-</script>
-<% } %>
-
-<script>
-	function Valid_data() {
-		var validok = Checking();
-		if(validok == true) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-</script>
+<% if (request.getAttribute("IDX") != null) { %><script>alert("<%= request.getAttribute("IDX") %>");</script><%}%>
+<%if(request.getAttribute("id_valid") != null) {%><script>alert("<%= request.getAttribute("id_valid") %>");</script><%}%>
+<%if(request.getAttribute("pwd_valid") != null) {%><script>alert("<%= request.getAttribute("pwd_valid") %>");</script><%}%>
+<%if(request.getAttribute("confirmpwd") != null) {%><script>alert("<%= request.getAttribute("confirmpwd") %>");</script><%}%>
 <head>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/CSS/register.css">
@@ -26,13 +14,13 @@
 <body>
 	<div class="register-title">회 원 가 입</div>
 	<div class="register-mainbox">
-		<form action="registercomplete" method="post" name="register" class="register-form" onsubmit="return Valid_data()">
+		<form action="registercomplete" method="post" name="register" class="register-form">
 			<p>ID</p>
 			<input type="text" name="ID" placeholder="ID" required>
 			<p>PWD</p>
 			<input type="password" name="PWD" placeholder="비밀번호" required>
 			<p>비밀번호 재확인</p>
-			<input type="password" name="ConfirmPwd" placeholder="비밀번호 재확인" required>
+			<input type="password" id="ConfirmPwd" name="ConfirmPwd" placeholder="비밀번호 재확인" required>
 			<p>나이</p>
 			<input type="number" min="0" step="1" name="Age" placeholder="나이(숫자만)" required>
 			<p>성별</p>
