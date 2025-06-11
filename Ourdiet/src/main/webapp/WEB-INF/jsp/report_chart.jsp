@@ -32,7 +32,7 @@
 		<%
 				}
 			} else {
-				if(c < total1[4]) {
+				if(c < total1[4] && c > 0) {
 		%>
 					<li><%=week[i]%>요일의 섭취량이 평균치보다 <%=String.format("%.1f",total1[4]-c)%>Kcal 만큼 적게 섭취하셨습니다.</li>
 		<%			

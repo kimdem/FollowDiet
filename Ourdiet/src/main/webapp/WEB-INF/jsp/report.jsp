@@ -46,9 +46,9 @@
 			</div>
 			<div class="totalinfo">
 				<div><span class="total-span">칼로리</span><B><%=week_info[i][0] %></B> Kcal</div>
-				<div><span class="total-span">탄수화물</span><B><%=week_info[i][0] %></B> g</div>
-				<div><span class="total-span">단백질</span><B><%=week_info[i][0] %></B> g</div>
-				<div><span class="total-span">지방</span><B><%=week_info[i][0] %></B> g</div>
+				<div><span class="total-span">탄수화물</span><B><%=week_info[i][1] %></B> g</div>
+				<div><span class="total-span">단백질</span><B><%=week_info[i][2] %></B> g</div>
+				<div><span class="total-span">지방</span><B><%=week_info[i][3] %></B> g</div>
 			</div>
 		</div>
 		<%}%>

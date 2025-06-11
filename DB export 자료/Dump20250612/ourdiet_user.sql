@@ -35,7 +35,7 @@ CREATE TABLE `user` (
   `ex` float NOT NULL,
   PRIMARY KEY (`User_id`),
   UNIQUE KEY `ID` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (4,'komcss121908','spnjhh1219!',25,177.6,77.4,72,0,0,1.2),(5,'komcss','spnjhh1219!',24,165,63,60,0,1,1.375),(6,'spnjhh1219','komcss1219!',26,25,70,76,1,0,1.375),(7,'spnjhh','komcss1219!',26,165,55,63,1,1,1.375),(8,'kokoko','spnjhh1219!',30,171,78,72,0,0,1.725);
+INSERT INTO `user` VALUES (14,'komcss1219','spnjhh1219!',25,177,77,72,0,0,1.2),(15,'komcss121908','spnjhh1219!',25,176,70,75,1,0,1.375);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-12  1:23:48
+-- Dump completed on 2025-06-12  3:01:30
