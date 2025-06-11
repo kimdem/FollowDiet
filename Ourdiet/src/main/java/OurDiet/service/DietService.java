@@ -1,12 +1,13 @@
 package OurDiet.service;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import OurDiet.dao.DietDao;
 import OurDiet.dto.Diet;
+import OurDiet.dto.Diet_fix_data;
 import OurDiet.dto.dietlist;
-import jakarta.servlet.http.HttpSession;
+import OurDiet.dto.food_fix;
 
 public class DietService {
 	private DietDao dietdao;
@@ -19,11 +20,11 @@ public class DietService {
 	}
 	
 	public dietlist _dietlist(int User_id, LocalDate date) {
-		List<Diet> todaylist = dietdao.todaydiet(User_id, date);
-		List<Diet> breakfastList = new ArrayList<>();
-	    List<Diet> lunchList = new ArrayList<>();
-	    List<Diet> dinnerList = new ArrayList<>();
-	    for (Diet d : todaylist) {
+		List<Diet_fix_data> todaylist = dietdao.todaydiet(User_id, date);
+		List<Diet_fix_data> breakfastList = new ArrayList<>();
+	    List<Diet_fix_data> lunchList = new ArrayList<>();
+	    List<Diet_fix_data> dinnerList = new ArrayList<>();
+	    for (Diet_fix_data d : todaylist) {
 	        if (d.getLevel() == 1) breakfastList.add(d);
 	        else if (d.getLevel() == 2) lunchList.add(d);
 	        else if (d.getLevel() == 3) dinnerList.add(d);
@@ -92,10 +93,10 @@ public class DietService {
 		double TDEE = 0;
 		double tan = 0, dan = 0, ji = 0;
 		if(gender == 0) {
-			TDEE = (double)(88.362 + (13.397 * weight) + (4.799 * Tall) - (5.677 * Age));
+			TDEE = (double)((10 * weight) + (6.25 * Tall) - (5 * Age) + 5);
 			TDEE *= ex;
 		} else {
-			TDEE = (double)(447.593 + (9.247 * weight) + (3.098 * Tall) - (4.330 * Age));
+			TDEE = (double)((10 * weight) + (6.25 * Tall) - (5 * Age) - 161);
 			TDEE *= ex;
 		}
 		switch(goal) {
@@ -115,5 +116,13 @@ public class DietService {
 			break;
 		}
 		return new double[] {TDEE, tan, dan, ji};
+	}
+	
+	public food_fix food_edit(int diet_id) {
+		return dietdao.food_edit(diet_id);
+	}
+	
+	public void food_update(Diet_fix_data diet) {
+		dietdao.food_update(diet);
 	}
 }

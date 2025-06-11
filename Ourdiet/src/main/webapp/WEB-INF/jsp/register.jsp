@@ -14,7 +14,7 @@
 <body>
 	<div class="register-title">회 원 가 입</div>
 	<div class="register-mainbox">
-		<form action="registercomplete" method="post" name="register" class="register-form">
+		<form action="register_request" method="post" name="register" class="register-form">
 			<p>ID</p>
 			<input type="text" name="ID" placeholder="ID" required>
 			<p>PWD</p>

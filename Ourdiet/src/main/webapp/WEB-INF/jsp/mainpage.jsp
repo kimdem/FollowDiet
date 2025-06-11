@@ -2,28 +2,21 @@
 <%@ page import="java.util.List" %>
 <%@ page import="OurDiet.dto.dietlist" %>
 <%@ page import="OurDiet.dto.Diet" %>
+<%@ page import="OurDiet.dto.Diet_fix_data" %>
 <%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html>
 <%if(request.getAttribute("too_long_name") != null) {%><script>alert("<%=request.getAttribute("too_long_name")%>")</script><%}%>
+<%if(request.getAttribute("food_update_complete") != null) {%><script>alert("<%=request.getAttribute("food_update_complete")%>")</script><%}%>
 <%
-	LocalDate today = LocalDate.now();
-	int nowyear = today.getYear();
-	int nowmonth = today.getMonthValue();
-	int nowday = today.getDayOfMonth();
-	
-	String yearP = request.getParameter("year");
-    String monthP = request.getParameter("month");
-    String dayP = request.getParameter("day");
-    
-    int selectedyear = yearP != null ? Integer.parseInt(yearP) : nowyear;
-    int selectedmonth = monthP != null ? Integer.parseInt(monthP) : nowmonth;
-    int selectedday = dayP!= null ? Integer.parseInt(dayP) : nowday;
-    
-    boolean yearok = selectedyear == nowyear;
-    boolean monthok = selectedmonth == nowmonth && yearok;
-    
-    LocalDate Date = LocalDate.of(selectedyear, selectedmonth, selectedday);
+	String date_req = request.getParameter("date");
+    LocalDate Date;
+    if(date_req != null) {
+    	Date = LocalDate.parse(date_req);
+    } else {
+    	Date = LocalDate.now();
+    }
+   
     double[] recommend = (double[])request.getAttribute("recommend");
     boolean weight_exists = true;
     if(recommend[0] == 0) {weight_exists = false;}
@@ -44,40 +37,10 @@
 	<%@ include file="sidebar.jsp" %>
 	<div class="diet-box">
 		<div class="date-box">
-			<form action="#" method="GET">
-			<label class="date-label">날짜 선택 : </label>
-			<select class="date-select" name="year" onChange="this.form.submit()">
-				<%for(int y = nowyear-10; y <= nowyear; y++) {%>
-					<option value="<%=y%>" <%=(y==selectedyear ? "selected" : "")%>> <%=y%>년</option>
-				<%}%>
-			</select>
-			
-			<select class="date-select" name="month" onChange="this.form.submit()">
-				<%
-				int maxM = (selectedyear == nowyear) ? nowmonth : 12;
-					for(int m = 1; m<=maxM; m++) {
-				%>
-					<option value="<%=m%>" <%=(m==selectedmonth ? "selected" : "")%>> <%=m%>월</option>
-				<%}%>
-			</select>
-
-			<select class="date-select" name="day" onChange="this.form.submit()">
-				<%
-				int maxD = 31;
-				if(selectedmonth == 2) {
-					maxD = 28;
-				} else if(selectedmonth == 4 || selectedmonth == 6 || selectedmonth == 9 || selectedmonth == 11) {
-					maxD = 30;
-				}
-				if(monthok) {
-					maxD = nowday;
-				}
-				for(int d = 1; d <=maxD; d++) {
-				%>
-					<option value="<%=d%>" <%=(d==selectedday ? "selected" : "")%>><%=d%>일</option> 
-				<%}%>
-			</select>
-		</form> 
+			 <form action="#" method="GET">
+			  <label class="date-label">날짜 선택 : </label>
+			  <input type="date" name="date" value="<%=Date.toString()%>" max="<%=LocalDate.now().toString()%>" onchange="this.form.submit()" class="date-input" required>
+			</form>
 		</div>
 	
 	<div class="weight-box">
@@ -102,16 +65,16 @@
 			float tan = 0, dan = 0, ji = 0;
 			OurDiet.dto.dietlist todaylist = (OurDiet.dto.dietlist)request.getAttribute("dietlist");
 			if(todaylist != null) {
-				List<OurDiet.dto.Diet> breakfastList = todaylist.getBreakfastList();
+				List<OurDiet.dto.Diet_fix_data> breakfastList = todaylist.getBreakfastList();
 				if (breakfastList != null && !breakfastList.isEmpty()) {
-					for (Diet diet : breakfastList) {
+					for (Diet_fix_data diet : breakfastList) {
 						Calrorysum1 += diet.getCalrory();
 						tan += diet.getTan();
 						dan += diet.getDan();
 						ji += diet.getJi();
 		%>
 			<li class="food-li">
-				<span><%=diet.getFood()%></span>
+			<a href="food_edit?diet_id=<%=diet.getDiet_id()%>"><span><%=diet.getFood()%></span></a>
 				<span><%=diet.getCalrory()%> Kcal</span>
 			</li>		
 		<%
@@ -132,16 +95,16 @@
 		<ul class="food-list">
 		<%
 		if(todaylist != null) {
-				List<OurDiet.dto.Diet> lunchList = todaylist.getLunchList();
+				List<OurDiet.dto.Diet_fix_data> lunchList = todaylist.getLunchList();
 				if (lunchList != null && !lunchList.isEmpty()) {
-					for (Diet diet : lunchList) {
+					for (Diet_fix_data diet : lunchList) {
 						Calrorysum2 += diet.getCalrory();
 						tan += diet.getTan();
 						dan += diet.getDan();
 						ji += diet.getJi();
 		%>
 			<li class="food-li">
-				<span>음식 : <%=diet.getFood()%></span>
+			<a href="food_edit?diet_id=<%=diet.getDiet_id()%>"><span><%=diet.getFood()%></span></a>
 				<span><%=diet.getCalrory()%> Kcal</span>
 			</li>
 		<%
@@ -162,16 +125,16 @@
 		<ul class="food-list">
 		<%
 		if(todaylist != null) {
-				List<OurDiet.dto.Diet> dinnerList = todaylist.getDinnerList();
+				List<OurDiet.dto.Diet_fix_data> dinnerList = todaylist.getDinnerList();
 				if(dinnerList != null && !dinnerList.isEmpty()) {
-					for (Diet diet : dinnerList) {
+					for (Diet_fix_data diet : dinnerList) {
 						Calrorysum3 += diet.getCalrory();
 						tan += diet.getTan();
 						dan += diet.getDan();
 						ji += diet.getJi();
 		%>
 			<li class="food-li">
-				<span><%=diet.getFood() %></span>
+			<a href="food_edit?diet_id=<%=diet.getDiet_id()%>"><span><%=diet.getFood()%></span></a>
 				<span><%=diet.getCalrory()%> Kcal</span>
 			</li>
 		<%

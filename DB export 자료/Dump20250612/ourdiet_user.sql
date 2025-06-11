@@ -16,24 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `diet`
+-- Table structure for table `user`
 --
 
-LOCK TABLES `diet` WRITE;
-/*!40000 ALTER TABLE `diet` DISABLE KEYS */;
-INSERT INTO `diet` VALUES (41,4,1,'치킨',150,120,30,120,'2025-06-01'),(42,4,1,'짜장면',22.2,55.4,35.7,30.7,'2025-06-01'),(43,4,1,'피자',150,30,10,50,'2025-06-01'),(44,4,1,'사탕',70,1,5,12,'2025-06-01'),(45,4,1,'피자',450,50,30,15,'2025-06-04'),(46,4,2,'짜장면',350,80,30,15,'2025-06-04'),(47,4,2,'콜라',85,5,2,10,'2025-06-04'),(48,4,2,'짜장면',320,40,30,20,'2025-06-01'),(49,4,1,'라면',375,40,30,10,'2025-06-09');
-/*!40000 ALTER TABLE `diet` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Dumping data for table `diet_info`
---
-
-LOCK TABLES `diet_info` WRITE;
-/*!40000 ALTER TABLE `diet_info` DISABLE KEYS */;
-INSERT INTO `diet_info` VALUES (8,4,73.2,712.2,246.4,232.7,'2025-06-01',110.7),(9,4,80,0,0,0,'2025-02-01',0),(10,4,80,0,0,0,'2025-05-02',0),(11,4,80,0,0,0,'2025-05-30',0),(12,4,78.4,0,0,0,'2025-05-31',0),(13,4,77,0,0,0,'2025-05-29',0),(14,4,71,0,0,0,'2025-05-28',0),(15,4,75,0,0,0,'2025-06-03',0),(16,4,74,885,135,40,'2025-06-04',62),(17,4,75,375,40,10,'2025-06-09',30);
-/*!40000 ALTER TABLE `diet_info` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user` (
+  `User_id` int NOT NULL AUTO_INCREMENT,
+  `ID` varchar(255) NOT NULL,
+  `PWD` varchar(255) NOT NULL,
+  `Age` int NOT NULL,
+  `Tall` float NOT NULL,
+  `Weight` float NOT NULL,
+  `WantedWeight` float NOT NULL,
+  `goal` int DEFAULT '0',
+  `gender` int NOT NULL,
+  `ex` float NOT NULL,
+  PRIMARY KEY (`User_id`),
+  UNIQUE KEY `ID` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
@@ -54,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-10  0:22:12
+-- Dump completed on 2025-06-12  1:23:48

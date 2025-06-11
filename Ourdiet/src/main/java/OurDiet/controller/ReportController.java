@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import OurDiet.dao.MemberDao;
+import OurDiet.dao.UserDao;
 import OurDiet.service.ReportService;
 import jakarta.servlet.http.HttpSession;
 
@@ -18,7 +18,7 @@ public class ReportController {
 	@Autowired
 	public ReportService reportservice;
 	@Autowired
-	public MemberDao memberdao;
+	public UserDao memberdao;
 	
 	
 	@GetMapping("report")

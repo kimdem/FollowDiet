@@ -79,7 +79,8 @@
 </div>
 <script>
 const calrory = document.getElementById("calrory").getContext("2d");
-const tandanji = document.getElementById("tandanji").getContext("2d")
+const weight = document.getElementById("weight").getContext("2d");
+const tandanji = document.getElementById("tandanji").getContext("2d");
 const calrory_chart = new Chart(calrory, {
     type: "line",
     data: {

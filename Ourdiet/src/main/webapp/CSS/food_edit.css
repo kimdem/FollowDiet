@@ -1,0 +1,121 @@
+body {
+  	background: linear-gradient(to right, #e8f5e9, #f1f8e9);
+  	font-family: 'Noto Sans KR', sans-serif;
+  	color: #222;
+  	font-size: 1rem;
+  	line-height: 1.7;
+  	margin: 0;
+  	padding: 0;
+  	min-height: 100vh;
+}
+
+.All-display {
+  	display: flex;
+  	min-height: 100vh;
+}
+
+h1 {
+  	color: #388e3c;
+  	text-align: center;
+  	margin-top: 0px;
+}
+
+.food_edit-box {
+  	width: 40%;
+  	margin: 60px auto 0 auto;
+  	background: #fff;
+  	border-radius: 16px;
+  	box-shadow: 0 4px 24px rgba(56, 142, 60, 0.13);
+  	padding: 38px 32px 32px 32px;
+  	display: flex;
+  	flex-direction: column;
+  	align-items: center;
+}
+
+.food_edit-box h1 {
+  	color: #388e3c;
+  	margin-bottom: 14px;
+  	font-size: 1.6rem;
+  	font-weight: 700;
+  	letter-spacing: 1px;
+}
+
+.food_edit-box p {
+  	color: #666;
+  	margin-bottom: 18px;
+  	font-size: 1.05rem;
+}
+
+.food_edit-form {
+  	display: flex;
+  	flex-direction: column;
+  	width: 100%;
+  	gap: 15px;
+}
+
+.food_edit-form label {
+  	font-weight: 500;
+  	color: #388e3c;
+  	margin-bottom: 4px;
+}
+
+.food_edit-form input[type="text"],
+.food_edit-form input[type="number"] {
+  	padding: 9px 12px;
+  	border: 1.5px solid #cdeac0;
+  	border-radius: 7px;
+  	font-size: 1.06rem;
+  	background: #f9fdf9;
+  	margin-bottom: 2px;
+  	transition: border 0.18s;
+}
+
+.food_edit-form input:focus {
+  	border: 1.5px solid #388e3c;
+  	background: #fff;
+  	outline: none;
+}	
+
+.diet-submit {
+  	margin-top: 8px;
+  	background: #388e3c;
+  	color: #fff;
+  	font-size: 1.08rem;
+  	font-weight: 600;
+  	border: none;
+  	border-radius: 8px;
+  	padding: 11px 0;
+  	cursor: pointer;
+  	transition: background 0.18s;
+}
+
+.diet-submit:hover {
+  	background: #2e7031;
+}
+
+.food_edit-form a {
+  	display: inline-block;
+  	margin-top: 8px;
+  	color: #388e3c;
+  	text-decoration: underline;
+  	font-size: 1rem;
+  	text-align: center;
+  	transition: color 0.18s;
+}
+
+.food_edit-form a:hover {
+  	color: #2e7031;
+}
+
+.totalbox {
+	margin-left: 240px;
+  	flex: 1;
+  	padding: 32px 24px;
+  	box-sizing: border-box
+}
+
+.aligncenter {
+  	display: flex;
+  	justify-content: center;
+  	width: 100%;
+}

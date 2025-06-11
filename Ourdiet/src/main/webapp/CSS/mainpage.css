@@ -40,28 +40,28 @@ body {
 }
 
 .date-label {
-  	font-weight: 600;
-  	color: #388e3c;
-  	margin-right: 8px;
+  	font-size: 1.07rem;
+	font-weight: 500;
+	color: #388e3c;
+	margin-right: 12px;
+	letter-spacing: 0.5px;
 }
 
-.date-select {  
-  	appearance: none;
-  	-webkit-appearance: none;
-  	-moz-appearance: none;
-  	background: #fff;
-  	border: 1.5px solid #c8e6c9;
+.date-input {
+	font-family: 'Noto Sans KR', sans-serif;
+  	padding: 8px 14px;
+  	font-size: 1.05rem;
+  	border: 2px solid #cdeac0;
   	border-radius: 8px;
-  	padding: 10px 38px 10px 14px;
-  	font-size: 1rem;
-  	color: #222;
-  	margin-right: 8px;
-  	box-shadow: 0 2px 8px rgba(76,175,80,0.06);
-  	transition: border 0.2s;
-}
-.date-select:focus {
-  	border-color: #4caf50;
+  	background: #fff;
+  	color: #333;
+  	transition: border 0.18s;
   	outline: none;
+}
+
+.date-input:focus {
+  	border: 2px solid #388e3c;
+  	background: #f7faf7;
 }
 
 .weight-box {
@@ -151,7 +151,13 @@ body {
   	box-shadow: 0 1px 4px rgba(76,175,80,0.08);
   	font-weight: 500;
 }
+
 .food-li:last-child { margin-bottom: 0; }
+
+.food-li a {
+	text-decoration: none;
+	color: black;
+}
 
 .food-null {
   	background: #ffe0b2;

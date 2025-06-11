@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import OurDiet.dao.MemberDao;
+import OurDiet.dao.UserDao;
 import OurDiet.dto.Diet;
+import OurDiet.dto.Diet_fix_data;
 import OurDiet.dto.dietlist;
+import OurDiet.dto.food_fix;
 import OurDiet.service.DietService;
 import jakarta.servlet.http.HttpSession;
 @Controller
@@ -20,7 +22,7 @@ public class DietController {
 	@Autowired
 	public DietService dietservice;
 	@Autowired
-	public MemberDao memberdao;
+	public UserDao memberdao;
 	
 	@PostMapping("insertdiet")
 	public String insetdiet(@RequestParam("date") String date, Diet diet, HttpSession session, RedirectAttributes red) {
@@ -39,13 +41,15 @@ public class DietController {
 			return "redirect:/errorpage";
 		}
 	}
+	
 	@GetMapping("/mainpage")
-	public String mainpageGet(@RequestParam(value="year", required = false) Integer year, @RequestParam(value="month", required=false) Integer month,  @RequestParam(value="day", required=false) Integer day,HttpSession session, Model model) {
-		LocalDate today = LocalDate.now();
-		int selectedyear = (year != null) ? year : today.getYear();
-	    int selectedmonth = (month != null) ? month : today.getMonthValue();
-	    int selectedday = (day != null) ? day : today.getDayOfMonth();
-	    LocalDate selectedDate = LocalDate.of(selectedyear, selectedmonth, selectedday);
+	public String mainpageGet(@RequestParam(value="date", required=false) String date, HttpSession session, Model model) {
+	    LocalDate selectedDate;
+	    if(date != null) {
+	    	selectedDate = LocalDate.parse(date);
+	    } else {
+	    	selectedDate = LocalDate.now();
+	    }
 	    
 		Integer UID = (Integer)session.getAttribute("UID");
 		Integer goal = (Integer)session.getAttribute("goal");
@@ -63,6 +67,30 @@ public class DietController {
 		}
 	}
 	
+	@GetMapping("food_edit")
+	public String food_edit(@RequestParam(value="diet_id", required=true) int diet_id, HttpSession session, Model model) {
+		Integer UID = (Integer)session.getAttribute("UID");
+		if(UID == null) {return "redirect:/Login";}
+		try {
+			food_fix diet = dietservice.food_edit(diet_id);
+			model.addAttribute("diet_id", diet_id);
+			model.addAttribute("diet", diet);
+			return "food_edit";
+		} catch (Exception ex) {
+			return "redirect:/errorpage";
+		}
+	}
+	
+	@PostMapping("food_fix")
+	public String food_fix(Diet_fix_data diet, Model model) {
+		try {
+			dietservice.food_update(diet);
+			return "redirect:/mainpage";
+		} catch (Exception ex) {
+			return "redirect:/errorpage";
+		}
+	}
+	
 	@PostMapping("insertW")
 	public String insetW(@RequestParam("weight") float weight, @RequestParam("time") String time, HttpSession session) {
 		Integer UID = (Integer)session.getAttribute("UID");
@@ -74,6 +102,7 @@ public class DietController {
 			return "redirect:/errorpage";
 		}
 	}
+	
 	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		session.invalidate();

@@ -4,10 +4,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import OurDiet.dao.DietDao;
-import OurDiet.dao.MemberDao;
+import OurDiet.dao.UserDao;
 import OurDiet.dao.ReportDao;
 import OurDiet.service.DietService;
-import OurDiet.service.MemberRegisterService;
+import OurDiet.service.UserService;
 import OurDiet.service.ReportService;
 @Configuration
 public class BeanConfig {
@@ -26,12 +26,12 @@ public class BeanConfig {
 	return ds;
 	}
 	@Bean
-	public MemberDao memberDao() {
-	return new MemberDao(dataSource());
+	public UserDao memberDao() {
+	return new UserDao(dataSource());
 	}
 	@Bean
-	public MemberRegisterService memberRegSvc() {
-	return new MemberRegisterService(memberDao());
+	public UserService memberRegSvc() {
+	return new UserService(memberDao());
 	}
 	@Bean
 	public DietDao dietdao() {

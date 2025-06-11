@@ -12,7 +12,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import OurDiet.dto.Diet;
-import jakarta.servlet.http.HttpSession;
+import OurDiet.dto.Diet_fix_data;
+import OurDiet.dto.food_fix;
 public class DietDao {
 	private JdbcTemplate jdbcTemplate;
 	public DietDao(DataSource dataSource) {
@@ -91,11 +92,12 @@ public class DietDao {
 	    } else {return false;}
 	}
 	
-	public List<Diet> todaydiet(int User_id, LocalDate date) {
-			List<Diet> results = jdbcTemplate.query(
+	public List<Diet_fix_data> todaydiet(int User_id, LocalDate date) {
+			List<Diet_fix_data> results = jdbcTemplate.query(
 				"SELECT * FROM diet WHERE User_id=? AND Diet_date=?",
 				(ResultSet rs, int rowNum) -> {
-					Diet diet = new Diet(
+					Diet_fix_data diet = new Diet_fix_data(
+							rs.getInt("Diet_id"),
 							rs.getInt("level"), 
 							rs.getString("Food"), 
 							rs.getFloat("Calrory"),
@@ -168,5 +170,44 @@ public class DietDao {
 					rs.getFloat("ex")
 			},UID);
 		return obj.get(0);
+	}
+	
+	public food_fix food_edit(int diet_id) {
+		String sql = "SELECT * FROM diet WHERE Diet_id=?";
+		List<food_fix> results = jdbcTemplate.query(sql,
+			(ResultSet rs, int rowNum) -> {
+				food_fix diet = new food_fix(
+						rs.getInt("level"),
+						rs.getString("Food"),
+						rs.getFloat("Calrory"),
+						rs.getFloat("Tan"),
+						rs.getFloat("dan"),
+						rs.getFloat("ji"),
+						rs.getDate("Diet_date").toLocalDate()
+						);
+				return diet;
+			},diet_id);
+		return results.get(0);
+	}
+	
+	public void food_update(Diet_fix_data diet) {
+		try {
+			jdbcTemplate.update(
+				new PreparedStatementCreator() {
+					public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+						String sql = "UPDATE diet SET Food=?, Calrory=?, Tan=?, dan=?, ji=? WHERE Diet_id=?";
+						PreparedStatement pstmt = con.prepareStatement(sql);
+						pstmt.setString(1, diet.getFood());
+						pstmt.setFloat(2, diet.getCalrory());
+						pstmt.setFloat(3, diet.getTan());
+						pstmt.setFloat(4, diet.getDan());
+						pstmt.setFloat(5, diet.getJi());
+						pstmt.setInt(6, diet.getDiet_id());
+						return pstmt;
+					}
+				});
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
 	}
 }
